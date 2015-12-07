@@ -60,6 +60,7 @@ input#msg {
 	border: 1px solid rgba(255, 215, 0, 0.13);
 	text-align: center;
 	max-width: 200px;
+    color: white;
 }
 footer {
 	position: fixed;
