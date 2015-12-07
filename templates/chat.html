@@ -1,8 +1,8 @@
 <h1>Jexia Simple Angular Chat <button type="button" class="btn btn-default pull-right" ng-click="logout()">Logout</button></h1>
 <div class="row msg" ng-repeat="item in feed | orderBy: 'createdAt'">
 	<div class="col-xs-12">
-	<span class="username" ng-bind="item.name"></span>
-	<span ng-bind="item.msg"></span>
+		<span class="username" ng-bind="item.name"></span>
+		<span ng-bind="item.msg"></span>
 	</div>
 </div>
 

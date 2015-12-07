@@ -1,4 +1,7 @@
-angular.module('simpleChat', ['ngRoute', 'luegg.directives'])
+angular.module('simpleChat', [
+	'ngRoute', 
+	'luegg.directives',
+	'angularMoment'])
 
 .run(function($rootScope, $http){
 	// Set your Jexia credentials here
