@@ -1,0 +1,73 @@
+.form-control::-webkit-input-placeholder { color: black; }
+.form-control:-moz-placeholder { color: black; }
+.form-control::-moz-placeholder { color: black; }
+.form-control:-ms-input-placeholder { color: black; }
+body {
+	color: #323232;
+	background: #323232;
+}
+h1 {
+	position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: white;
+    z-index: 1;
+    margin: 0;
+    padding: 10px;
+    border-bottom: 1px solid black;
+    background: #fab700;
+}
+h1 .btn {
+	background-color: #323232;
+	border-color: #323232;
+	color: white;
+}
+.container-fluid {
+	padding: 0px 20px;
+	position: fixed;
+    left: 0;
+    right: 0;
+    top: 60px;
+    bottom: 60px;
+    overflow: auto;
+}
+.container-fluid .row {
+	padding: 10px 0;
+    margin: 10px 0;
+    background: rgba(255, 255, 255, 0.13);
+    color: white;
+    font-family: monospace;
+}
+.container-fluid .row .username {
+	color: #fab700;
+}
+input#msg {
+	min-width: 300px;
+    background: transparent;
+    box-shadow: none;
+    border: none;
+    border-bottom: 1px solid #323232;
+    border-radius: 0;
+    padding: 0;
+    margin: 0 0 0 15px;
+    font-size: 1.3em;
+    color: #323232;
+}
+.container-fluid .login {
+	margin: 100px auto 20px;
+	padding: 15px;
+	border: 1px solid rgba(255, 215, 0, 0.13);
+	text-align: center;
+	max-width: 200px;
+}
+footer {
+	position: fixed;
+	bottom: 0px;
+	left: 0px;
+	right: 0px;
+	height: 60px;
+	line-height: 60px;
+	padding: 0 20px;
+	background: #fab700;
+}

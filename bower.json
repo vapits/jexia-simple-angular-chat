@@ -1,0 +1,22 @@
+{
+  "name": "jexia-simple-angular-chat",
+  "description": "",
+  "main": "",
+  "authors": [
+    "Vassilis <vapits@gmail.com>"
+  ],
+  "license": "MIT",
+  "moduleType": [],
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular-faye": "~0.2.2"
+  }
+}
