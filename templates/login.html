@@ -1,6 +1,7 @@
-<div class="login">
+<form class="login" ng-submit="login()">
 	<div class="form-group">
-		<input class="form-control" ng-model="username" placeholder="Joe Doe">
+		<label>Your name:</label>
+		<input class="form-control" ng-model="username" autofocus>
 	</div>
-	<button type="button" class="btn btn-warning form-control" ng-click="login()">Login</button>
-</div>
+	<button type="submit" class="btn btn-warning form-control" ng-click="login()">Login</button>
+</form>
