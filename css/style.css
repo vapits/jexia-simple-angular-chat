@@ -17,6 +17,7 @@ h1 {
     padding: 10px;
     border-bottom: 1px solid black;
     background: #fab700;
+    z-index: 1;
 }
 h1 .btn {
 	background-color: #323232;
@@ -71,4 +72,5 @@ footer {
 	line-height: 60px;
 	padding: 0 20px;
 	background: #fab700;
+    z-index: 1;
 }
