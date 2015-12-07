@@ -93,7 +93,11 @@ angular.module('simpleChat', ['ngRoute', 'luegg.directives'])
 	};
 
 	$scope.postMsg = function () {
-		if($scope.msg === '') return false;
+
+		if ($scope.msg === '' || $scope.msg === null || 
+			$scope.msg.match(/^\s*$/)) {
+			return false;	
+		}
 
 		$http({
 			method: 'POST',
