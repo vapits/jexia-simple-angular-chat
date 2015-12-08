@@ -20,6 +20,8 @@
     "angular": "~1.4.8",
     "angular-route": "~1.4.8",
     "angular-scroll-glue": "~2.0.6",
-    "angular-moment": "~0.10.3"
+    "angular-moment": "~0.10.3",
+    "angular-bootstrap": "~0.14.3",
+    "bootstrap": "~3.3.6"
   }
 }

@@ -1,7 +1,8 @@
 angular.module('simpleChat', [
 	'ngRoute', 
 	'luegg.directives',
-	'angularMoment'])
+	'angularMoment',
+	'ui.bootstrap'])
 
 .run(function($rootScope, $http){
 
