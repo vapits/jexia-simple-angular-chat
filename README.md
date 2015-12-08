@@ -4,7 +4,7 @@ A simple chat example using Jexia.
 NOTE: This is an ongoing project and it will be updated in the next few days.
 
 ## Demo
-See a working demo (and let's chat) @ http://jexia.pixelnet.gr/chat
+Soon
 
 ## Get it ready
 To use this project you should have a Jexia account. You can get one for free at www.jexia.com
