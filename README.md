@@ -20,8 +20,8 @@ To use this project you should have a Jexia account. You can get one for free at
 2. ```cd jexia-simple-angular-chat```
 3. ```npm install```
 4. ```bower install```
-5. Edit file ```js/app.js``` with your Jexia credentials
-6. ```grunt run````
+5. Edit file ```js/config.js``` with your Jexia credentials
+6. ```grunt run```
 
 Project should run on ```http://localhost:8000```
 
