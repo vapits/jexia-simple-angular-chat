@@ -78,6 +78,8 @@ input#msg {
 	text-align: center;
 	max-width: 200px;
     color: white;
+    position: relative;
+    overflow: hidden;
 }
 footer {
 	position: fixed;
