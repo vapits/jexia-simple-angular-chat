@@ -56,13 +56,13 @@ angular.module('simpleChat', [
 		var username = localStorage.getItem('username');
 
 		// Your Jexia Data Set where are msgs stored
-		var dataset = 'feed';
+		var feedDataSet = 'feed';
 
 		// Let's create a simple call to get latest massages
 		function getMsgs() {
 			$http({
 				method: 'GET',
-				url: $rootScope.credentials.appUrl + dataset + '?sort=createdAt DESC',
+				url: $rootScope.credentials.appUrl + feedDataSet + '?sort=createdAt DESC',
 				headers: {
 					'Authorization': 'Bearer ' + token
 				}
@@ -96,7 +96,7 @@ angular.module('simpleChat', [
 
 			$http({
 				method: 'POST',
-				url: $rootScope.credentials.appUrl + dataset,
+				url: $rootScope.credentials.appUrl + feedDataSet,
 				headers: {
 					'Authorization': 'Bearer ' + token
 				},
@@ -137,13 +137,13 @@ angular.module('simpleChat', [
 	    // RTC channel can be found within RTC tab
 	    // in Jexia Data Set page otherwise the channel
 	    // is a combination of the following variables
-	    var channel = '/' + $rootScope.credentials.appId + '/' + dataset + '/' + $rootScope.credentials.key;
+	    var msgsChannel = '/' + $rootScope.credentials.appId + 
+	    			'/' + feedDataSet + '/' + $rootScope.credentials.key;
 
 	    // Let's Subscribe to the data set channel, get
 	    // any new messages broadcasted and put them to scope.
 	    // Don't forget to apply on scope.
-	    client.subscribe(channel, function(msg) {
-
+	    client.subscribe(msgsChannel, function(msg) {
 	    	// Unshift the msg contents to our feed
 	        $scope.feed.unshift(msg.data);
 
