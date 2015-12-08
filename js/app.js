@@ -9,28 +9,30 @@ angular.module('simpleChat', [
 	// edit them to config.js
 	$rootScope.credentials = angular.copy(jexia);
 
-	$http({
-		method: 'POST',
-		url: $rootScope.credentials.appUrl,
-		data: {
-			key: $rootScope.credentials.key,
-			secret: $rootScope.credentials.secret
-		}
-	}).then(function(response){
-
-		// Return Bearer with token to use it in every call
-		localStorage.setItem('token', response.data.token);
-
-	}, function(error){
-		
-		// Log the error message
-		console.log(error.data.message);
-
-	});
+	
 })
 
-.controller('loginCtrl', [ '$scope', '$rootScope', '$location',
-	function($scope, $rootScope, $location) {
+.service('tokenService', ['$http', '$rootScope', function($http, $rootScope){
+
+	this.getToken = function() {
+		return $http({
+			method: 'POST',
+			url: $rootScope.credentials.appUrl,
+			data: {
+				key: $rootScope.credentials.key,
+				secret: $rootScope.credentials.secret
+			}
+		}).then(function(response){
+			return response;
+		}, function(error){
+			return error;
+		});
+	};
+
+}])
+
+.controller('loginCtrl', [ '$scope', '$rootScope', '$location', '$http', 'tokenService',
+	function($scope, $rootScope, $location, $http, tokenService) {
 
 		var username = localStorage.getItem('username');
 		if (username) {
@@ -41,9 +43,37 @@ angular.module('simpleChat', [
 		$scope.username = '';
 
 		$scope.login = function () {
-			if ($scope.username !== '') {
-				localStorage.setItem('username', $scope.username);
-				$location.path('/chat');
+			if ($scope.username !== '' || $scope.username.match(/^\s*$/)) {
+
+				tokenService.getToken()
+				.then(function(response) {
+
+					// Set token to local storage for further usage
+					localStorage.setItem('token', response.data.token);
+					var token = localStorage.getItem('token');
+
+					$http({
+						method: 'POST',
+						url: $rootScope.credentials.appUrl + $rootScope.credentials.usersDataSet,
+						headers: {
+							'Authorization': 'Bearer ' + token
+						},
+						data: {
+							'username': $scope.username,
+							'loggedIn': true
+						}
+					}).then(function(response){
+						localStorage.setItem('username', $scope.username);
+						localStorage.setItem('userId', response.data.id);
+						$location.path('/chat');
+					}, function(error){
+						//console.log(error);
+					});
+
+				}, function(error) {
+					console.log(error.data.message);
+				});
+
 			}
 		};
 	
@@ -54,15 +84,13 @@ angular.module('simpleChat', [
 
 		var token = localStorage.getItem('token');
 		var username = localStorage.getItem('username');
-
-		// Your Jexia Data Set where are msgs stored
-		var feedDataSet = 'feed';
+		var userId = localStorage.getItem('userId');
 
 		// Let's create a simple call to get latest massages
 		function getMsgs() {
 			$http({
 				method: 'GET',
-				url: $rootScope.credentials.appUrl + feedDataSet + '?sort=createdAt DESC',
+				url: $rootScope.credentials.appUrl + $rootScope.credentials.feedDataSet + '?sort=createdAt DESC',
 				headers: {
 					'Authorization': 'Bearer ' + token
 				}
@@ -83,9 +111,30 @@ angular.module('simpleChat', [
 		}
 
 		$scope.logout = function() {
-			localStorage.removeItem('username');
-			$location.path('/login');
+
+			$http({
+				method: 'PUT',
+				url: $rootScope.credentials.appUrl + 
+					$rootScope.credentials.usersDataSet + 
+					'/' + userId,
+				headers: {
+					'Authorization': 'Bearer ' + token
+				},
+				data: {
+					'id': userId,
+					'loggedIn': false
+				}
+			}).then(function(response){
+				localStorage.removeItem('username');
+				localStorage.removeItem('userId');
+				localStorage.removeItem('token');
+				$location.path('/login');
+			}, function(error){
+				console.log(error);
+			});
+
 		};
+
 
 		$scope.postMsg = function () {
 
@@ -96,7 +145,7 @@ angular.module('simpleChat', [
 
 			$http({
 				method: 'POST',
-				url: $rootScope.credentials.appUrl + feedDataSet,
+				url: $rootScope.credentials.appUrl + $rootScope.credentials.feedDataSet,
 				headers: {
 					'Authorization': 'Bearer ' + token
 				},
@@ -137,8 +186,13 @@ angular.module('simpleChat', [
 	    // RTC channel can be found within RTC tab
 	    // in Jexia Data Set page otherwise the channel
 	    // is a combination of the following variables
+
+	    // Msgs Channel
 	    var msgsChannel = '/' + $rootScope.credentials.appId + 
-	    			'/' + feedDataSet + '/' + $rootScope.credentials.key;
+	    			'/' + $rootScope.credentials.feedDataSet + '/' + $rootScope.credentials.key;
+	    // Users Channel
+	    var usersChannel = '/' + $rootScope.credentials.appId + 
+	    			'/' + $rootScope.credentials.usersDataSet + '/' + $rootScope.credentials.key;
 
 	    // Let's Subscribe to the data set channel, get
 	    // any new messages broadcasted and put them to scope.
@@ -151,6 +205,19 @@ angular.module('simpleChat', [
 	        if(!$scope.$$phase) {
 	        	$scope.$apply();
 			}
+	    });
+
+	    // Now let's listen when a new user enters or left chat room
+	    client.subscribe(usersChannel, function(msg) {
+	    	// Unshift the msg contents to our feed
+	        $scope.feed.unshift(msg.data);
+
+	        // Verify that digest is not running to avoid errors
+	        if(!$scope.$$phase) {
+	        	$scope.$apply();
+			}
+	    }).then(null, function(error){
+	    	console.log(error);
 	    });
 	
 }])
