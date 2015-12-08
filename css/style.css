@@ -34,14 +34,30 @@ h1 .btn {
     overflow: auto;
 }
 .container-fluid .row {
-	padding: 10px 0;
     margin: 10px 0;
     background: rgba(255, 255, 255, 0.13);
     color: white;
     font-family: monospace;
 }
+.container-fluid .row .inner {
+    padding: 10px 15px;
+}
 .container-fluid .row .username {
 	color: #fab700;
+}
+.container-fluid .row .green,
+.container-fluid .row .green .username{
+    color: green;
+    font-style: italic;
+    background: #323232;
+    padding: 0;
+}
+.container-fluid .row .red,
+.container-fluid .row .red .username {
+    color: red;
+    font-style: italic;
+    background: #323232;
+    padding: 0;
 }
 input#msg {
 	min-width: 300px;
