@@ -17,6 +17,9 @@
     "tests"
   ],
   "dependencies": {
-    "angular-faye": "~0.2.2"
+    "angular": "~1.4.8",
+    "angular-route": "~1.4.8",
+    "angular-scroll-glue": "~2.0.6",
+    "angular-moment": "~0.10.3"
   }
 }
