@@ -48,7 +48,7 @@ angular.module('simpleChat')
 	
 }])
 
-.controller('appCtrl', [ '$scope', '$rootScope', '$http', '$location',
+.controller('appCtrl', [ '$scope', '$rootScope', '$http', '$location', 
 	function($scope, $rootScope, $http, $location) {
 
 		var token = localStorage.getItem('token');
@@ -191,5 +191,6 @@ angular.module('simpleChat')
 	    }).then(null, function(error){
 	    	console.log(error);
 	    });
-	
-}])
+
+}]);
+
