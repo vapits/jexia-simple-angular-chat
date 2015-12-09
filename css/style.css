@@ -92,3 +92,31 @@ footer {
 	background: #fab700;
     z-index: 1;
 }
+
+@media screen and (max-width: 768px){
+    .container-fluid {
+        top: 0;
+        bottom: 0;
+        padding: 40px 10px 60px;
+    }
+    h1 {
+        font-size: 17px
+    }
+    h1 .btn {
+        font-size: 10px;
+        padding: 2px 4px;
+    }
+    .container-fluid .row {
+        margin: 0;
+        background: transparent;
+    }
+    .container-fluid .row .inner {
+        padding: 5px;
+    }
+    footer { padding: 0; }
+    footer h4 { display: none; }
+    input#msg {
+        max-width: 96%;
+        margin: 0 2%;
+    }
+}
