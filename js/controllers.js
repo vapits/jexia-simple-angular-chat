@@ -1,9 +1,11 @@
 angular.module('simpleChat')
 
-.controller('loginCtrl', [ '$scope', '$rootScope', '$location', '$http', 'tokenService',
-	function($scope, $rootScope, $location, $http, tokenService) {
+.controller('loginCtrl', [ '$scope', '$rootScope', '$location', 
+	'$http', 'tokenService',
+	function($scope, $rootScope, $location, $http, 
+		tokenService) {
 
-		var username = localStorage.getItem('username');
+		var username = sessionStorage.getItem('username');
 		if (username) {
 			$location.path('/chat');
 		}
@@ -18,8 +20,8 @@ angular.module('simpleChat')
 				.then(function(response) {
 
 					// Set token to local storage for further usage
-					localStorage.setItem('token', response.data.token);
-					var token = localStorage.getItem('token');
+					sessionStorage.setItem('token', response.data.token);
+					var token = sessionStorage.getItem('token');
 
 					$http({
 						method: 'POST',
@@ -32,8 +34,8 @@ angular.module('simpleChat')
 							'loggedIn': true
 						}
 					}).then(function(response){
-						localStorage.setItem('username', $scope.username);
-						localStorage.setItem('userId', response.data.id);
+						sessionStorage.setItem('username', $scope.username);
+						sessionStorage.setItem('userId', response.data.id);
 						$location.path('/chat');
 					}, function(error){
 						//console.log(error);
@@ -48,12 +50,12 @@ angular.module('simpleChat')
 	
 }])
 
-.controller('appCtrl', [ '$scope', '$rootScope', '$http', '$location', 
-	function($scope, $rootScope, $http, $location) {
+.controller('appCtrl', [ '$scope', '$rootScope', '$http', '$location', '$window',
+	function($scope, $rootScope, $http, $location, $window) {
 
-		var token = localStorage.getItem('token');
-		var username = localStorage.getItem('username');
-		var userId = localStorage.getItem('userId');
+		var token = sessionStorage.getItem('token');
+		var username = sessionStorage.getItem('username');
+		var userId = sessionStorage.getItem('userId');
 
 		// Let's create a simple call to get latest massages
 		function getMsgs() {
@@ -94,14 +96,14 @@ angular.module('simpleChat')
 					'loggedIn': false
 				}
 			}).then(function(response){
-				localStorage.removeItem('username');
-				localStorage.removeItem('userId');
-				localStorage.removeItem('token');
+				sessionStorage.removeItem('username');
+				sessionStorage.removeItem('userId');
+				sessionStorage.removeItem('token');
 				$location.path('/login');
 			}, function(error){
-				localStorage.removeItem('username');
-				localStorage.removeItem('userId');
-				localStorage.removeItem('token');
+				sessionStorage.removeItem('username');
+				sessionStorage.removeItem('userId');
+				sessionStorage.removeItem('token');
 				$location.path('/login');
 			});
 
