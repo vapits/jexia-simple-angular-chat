@@ -42,7 +42,7 @@ angular.module('simpleChat')
 					});
 
 				}, function(error) {
-					console.log(error.data.message);
+					//console.log(error.data.message);
 				});
 
 			}
@@ -68,7 +68,7 @@ angular.module('simpleChat')
 			}).then(function(response){
 				$scope.feed = response.data;
 			}, function(error){
-				console.log(error);
+				//console.log(error);
 			});
 		}
 
@@ -130,7 +130,7 @@ angular.module('simpleChat')
 			}).then(function(response){
 				$scope.msg = '';
 			}, function(error){
-				console.log(error);
+				//console.log(error);
 			});
 		};
 
@@ -191,13 +191,7 @@ angular.module('simpleChat')
 	        	$scope.$apply();
 			}
 	    }).then(null, function(error){
-	    	console.log(error);
+	    	// console.log(error);
 	    });
-
-	    // Logout user if here refresh or close the window
-	    $window.onbeforeunload = function (e) {
-	    	$scope.logout();
-	    };
-
 }]);
 
