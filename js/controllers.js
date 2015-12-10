@@ -194,5 +194,10 @@ angular.module('simpleChat')
 	    	console.log(error);
 	    });
 
+	    // Logout user if here refresh or close the window
+	    $window.onbeforeunload = function (e) {
+	    	$scope.logout();
+	    };
+
 }]);
 
