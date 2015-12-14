@@ -2,6 +2,7 @@
 A simple chat example using Jexia.
 
 NOTE: This is an ongoing project and it will be updated in the next few days.
+In the next version we gone use the upcoming Jexia SDK for better authentication and less, less code ;)
 
 ## Demo
 You can see a working example here: http://jexia.pixelnet.gr/chat
