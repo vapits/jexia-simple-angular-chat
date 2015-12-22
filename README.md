@@ -15,7 +15,7 @@ To use this project you should have a Jexia account. You can get one for free at
 2. Create a Data App
 3. Create two (2) Data Sets (users & feed)
 4. Add two (2) fields (name & msg) with type 'string' to Data Set 'feed'
-5. Add two (2) fields (usename & loggedIn)
+5. Add two (2) fields (username & loggedIn) with types 'string' and 'boolean' to Data Set 'users'
 
 ## Install
 1. Clone Repo (Well a fork is always nicer)
