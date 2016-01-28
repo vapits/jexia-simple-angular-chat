@@ -25,8 +25,8 @@ h1 .btn {
 	color: white;
 }
 .container-fluid {
-	padding: 0px 20px;
-	position: fixed;
+    padding: 0px 20px;
+    position: absolute;
     left: 0;
     right: 0;
     top: 60px;
