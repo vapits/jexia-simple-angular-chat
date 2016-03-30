@@ -1,4 +1,6 @@
 # jexia-simple-angular-chat
+[![Code Climate](https://codeclimate.com/repos/56fba4a14286184f73002343/badges/23e34f957cb815e7b65d/gpa.svg)](https://codeclimate.com/repos/56fba4a14286184f73002343/feed)
+
 A simple chat example using Jexia.
 
 NOTE: This is an ongoing project and it will be updated in the next few days.
